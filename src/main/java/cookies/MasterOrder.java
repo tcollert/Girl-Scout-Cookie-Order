@@ -44,20 +44,24 @@ public class MasterOrder {
             totalBoxesSold += orderAtThisIndex.getNumBoxes();
         }
         return totalBoxesSold;
-    }
-
-    public void showOrder() {
 
     }
-
-    int countVarietyBoxes;
 
     public int getVarietyBoxes(String variety) {
+        int countVarietyBoxes = 0;
         for (CookieOrder order : orders) {
             if (order.getVarietyOfCookie().equals(variety)) {
                 countVarietyBoxes += order.getNumBoxes();
             }
         }
-        return 5;
+        return countVarietyBoxes;
+
+    }
+
+    public void showOrder() {
+        for (CookieOrder order : orders) {
+            System.out.println("Variety: " + order.getVarietyOfCookie() + " Boxes: " + order.getNumBoxes());
+
+        }
     }
 }

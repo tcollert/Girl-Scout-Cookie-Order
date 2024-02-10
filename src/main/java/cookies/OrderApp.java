@@ -20,7 +20,7 @@ public class OrderApp {
         myOrder.addOrder(theodoresOrder);
         myOrder.addOrder(davesOrder);
 
-        System.out.println("Curent Order");
+        System.out.println("Current Order");
         myOrder.showOrder();
         System.out.println();
         System.out.println("You have ordered " + myOrder.getTotalBoxes() + " boxes");
@@ -30,9 +30,12 @@ public class OrderApp {
 
         System.out.println("You are removing " + myOrder.getVarietyBoxes(varietyToRemove) + " " + varietyToRemove);
         myOrder.removeVariety(varietyToRemove);
-        System.out.println("Curent Order");
+        System.out.println("Current Order");
         myOrder.showOrder();
-
+        int somoaCount = myOrder.getVarietyBoxes("Somoas");
+        System.out.println(somoaCount);
+        int tagalongsCount = myOrder.getVarietyBoxes("Tagalongs");
+        System.out.println(tagalongsCount);
         input.close();
     }
 }
