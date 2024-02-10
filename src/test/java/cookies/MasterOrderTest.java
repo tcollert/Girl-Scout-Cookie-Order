@@ -2,62 +2,55 @@ package cookies;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class MasterOrderTest {
+    private MasterOrder underTest;
 
-    @Test
-    public void shouldReturnTotalBoxesOfOne() {
+    @BeforeEach
+    public void setup() {
+        underTest = new MasterOrder();
 
-        MasterOrder underTest = new MasterOrder();
-        CookieOrder cookieOrderTest = new CookieOrder(" ", 1);
-        CookieOrder cookieOrderTest2 = new CookieOrder(" ", 1);
-        underTest.addOrder(cookieOrderTest);
-        underTest.addOrder(cookieOrderTest2);
-        int check = underTest.getTotalBoxes();
+        CookieOrder cookieOrderTest = new CookieOrder("Thin Mints ", 5);
+        CookieOrder cookieOrderTest2 = new CookieOrder("Samoas ", 2);
+        CookieOrder cookieOrderTest3 = new CookieOrder("Tagalongs ", 1);
+        CookieOrder cookieOrderTest4 = new CookieOrder("Lemonades ", 3);
 
-        assertEquals(1, check);
-
-    }
-
-    @Test
-    public void shouldReturnTotalBoxesOfTwo() {
-
-        MasterOrder underTest = new MasterOrder();
-        CookieOrder cookieOrderTest = new CookieOrder(" ", 1);
-        CookieOrder cookieOrderTest2 = new CookieOrder(" ", 1);
-        underTest.addOrder(cookieOrderTest);
-        underTest.addOrder(cookieOrderTest2);
-        int check = underTest.getTotalBoxes();
-
-        assertEquals(2, check);
-    }
-
-    @Test
-    public void shouldReturnTotalBoxesAsOneAfterRemoval() {
-        MasterOrder underTest = new MasterOrder();
-        CookieOrder cookieOrderTest = new CookieOrder(" thin mints", 1);
-        CookieOrder cookieOrderTest2 = new CookieOrder("samoas ", 1);
-        CookieOrder cookieOrderTest3 = new CookieOrder(" thin mints", 1);
         underTest.addOrder(cookieOrderTest);
         underTest.addOrder(cookieOrderTest2);
         underTest.addOrder(cookieOrderTest3);
-        underTest.removeVariety("thin mints");
-        int check = underTest.getTotalBoxes();
-        assertEquals(1, check);
+        underTest.addOrder(cookieOrderTest4);
 
     }
 
     @Test
-    public void shouldReturnTotalBoxesOf2ForThinMints() {
-        MasterOrder underTest = new MasterOrder();
-        CookieOrder cookieOrderTest = new CookieOrder(" thin mints", 1);
-        CookieOrder cookieOrderTest2 = new CookieOrder("samoas ", 1);
-        CookieOrder cookieOrderTest3 = new CookieOrder(" thin mints", 1);
-        underTest.addOrder(cookieOrderTest);
-        underTest.addOrder(cookieOrderTest2);
-        underTest.addOrder(cookieOrderTest3);
-        int check = underTest.getVarietyBoxes("thin mints");
-        assertEquals(2, check);
+    public void testGetTotalBoxes() {
+
+        int check = underTest.getTotalBoxes();
+
+        assertEquals(11, check);
+
     }
+
+    @Test
+    public void testRemoveVariety() {
+
+        underTest.removeVariety("Samoas ");
+
+        assertEquals(9, underTest.getTotalBoxes());
+
+    }
+
+    @Test
+    public void testGetVarietyBoxes() {
+
+        CookieOrder cookieOrderTest5 = new CookieOrder("Lemonades ", 3);
+
+        underTest.addOrder(cookieOrderTest5);
+        int check = underTest.getVarietyBoxes("Lemonades ");
+
+        assertEquals(6, check);
+    }
+
 }
